@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class App {
 
@@ -9,52 +11,71 @@ public class App {
 
     public static void converter() {
 
-        JFrame frame = new JFrame("Currency Converter");
+        JFrame frame = new JFrame("Temperature Converter");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JLabel labelEuro, labelDollar;
+        JLabel labelCelsius, labelFah;
 
-        JTextField textFieldEuro, textFieldDollar;
+        JTextField textFieldCelsius, textFieldFah;
 
-        JButton buttonEuro, buttonDollar, buttonClose;
+        JButton buttonCelsius, buttonFah, buttonClose;
 
-        labelEuro = new JLabel("Euro");
-        labelEuro.setBounds(20, 40, 60, 30);
+        labelCelsius = new JLabel("Celcius");
+        labelCelsius.setBounds(20, 40, 60, 30);
 
-        labelDollar = new JLabel("Dollars");
-        labelDollar.setBounds(170, 40, 60, 30);
-        
-        textFieldEuro = new JTextField("0");
-        textFieldEuro.setBounds(80, 40, 50, 30);
+        labelFah = new JLabel("Fahrenheit");
+        labelFah.setBounds(170, 40, 80, 30);
 
-        textFieldDollar = new JTextField("0");
-        textFieldDollar.setBounds(240, 40, 50, 30);
+        textFieldCelsius = new JTextField("0");
+        textFieldCelsius.setBounds(80, 40, 50, 30);
 
+        textFieldFah = new JTextField("0");
+        textFieldFah.setBounds(240, 40, 50, 30);
 
-        buttonEuro = new JButton("Euros");
-        buttonEuro.setBounds(50, 80, 80, 15);
+        buttonCelsius = new JButton("Celcius");
+        buttonCelsius.setBounds(50, 80, 80, 15);
 
-        
-        buttonDollar = new JButton("Dollars");
-        buttonDollar.setBounds(190, 80, 80, 15);
+        buttonFah = new JButton("Fahrenheit");
+        buttonFah.setBounds(190, 80, 100, 15);
 
-        
         buttonClose = new JButton("Close");
-        buttonClose.setBounds(150, 150, 60, 30);
-        
-        frame.add(labelEuro);
-        frame.add(labelDollar);
+        buttonClose.setBounds(150, 150, 80, 30);
 
-        frame.add(textFieldEuro);
-        frame.add(textFieldDollar);
+        buttonCelsius.addActionListener(new ActionListener() {
 
+            public void actionPerformed(ActionEvent e) {
+                double celcius = Double.parseDouble(textFieldCelsius.getText());
+                double fahrenheit = celcius * 9 / 5 + 32;
+                String fahString = String.valueOf(fahrenheit);
+                textFieldFah.setText(fahString);
+            }
+        });
 
-        frame.add(buttonEuro);
-        frame.add(buttonDollar);
+        buttonFah.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                double fahrenheit = Double.parseDouble(textFieldFah.getText());
+                double celcius = (fahrenheit - 32) * 5 / 9;
+                String celString = String.valueOf(celcius);
+                textFieldCelsius.setText(celString);
+            }
+        });
+
+        buttonClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+
+        frame.add(labelCelsius);
+        frame.add(labelFah);
+
+        frame.add(textFieldCelsius);
+        frame.add(textFieldFah);
+
+        frame.add(buttonCelsius);
+        frame.add(buttonFah);
         frame.add(buttonClose);
 
-        
-        
         frame.setLayout(null);
         frame.setSize(400, 300);
         frame.setVisible(true);
