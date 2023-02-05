@@ -1,11 +1,10 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
+import java.text.DecimalFormat;
 
 public class App {
 
     public static void main(String[] args) {
-
         converter();
     }
 
@@ -15,9 +14,7 @@ public class App {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel labelCelsius, labelFah;
-
         JTextField textFieldCelsius, textFieldFah;
-
         JButton buttonCelsius, buttonFah, buttonClose;
 
         labelCelsius = new JLabel("Celcius");
@@ -41,12 +38,13 @@ public class App {
         buttonClose = new JButton("Close");
         buttonClose.setBounds(150, 150, 80, 30);
 
-        buttonCelsius.addActionListener(new ActionListener() {
+        DecimalFormat df = new DecimalFormat("###.#");
 
+        buttonCelsius.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 double celcius = Double.parseDouble(textFieldCelsius.getText());
                 double fahrenheit = celcius * 9 / 5 + 32;
-                String fahString = String.valueOf(fahrenheit);
+                String fahString = df.format(fahrenheit);
                 textFieldFah.setText(fahString);
             }
         });
@@ -55,7 +53,7 @@ public class App {
             public void actionPerformed(ActionEvent e) {
                 double fahrenheit = Double.parseDouble(textFieldFah.getText());
                 double celcius = (fahrenheit - 32) * 5 / 9;
-                String celString = String.valueOf(celcius);
+                String celString = df.format(celcius);
                 textFieldCelsius.setText(celString);
             }
         });
@@ -79,7 +77,5 @@ public class App {
         frame.setLayout(null);
         frame.setSize(400, 300);
         frame.setVisible(true);
-
     }
-
 }
